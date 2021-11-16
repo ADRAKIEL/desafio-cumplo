@@ -6,7 +6,7 @@
   "scripts": {
     "start:backend": "COUNTDOWN_SECONDS=30 CANDIDATES_COUNT=40 node server/index.js",
     "start:frontend": "exit 0",
-    "start": "concurrently \"cd client/ && npm install-clean && npm start\" \"npm run start:backend\""
+    "start": "concurrently \"cd client-side/ && npm install-clean && npm start\" \"npm run start:backend\""
   },
   "author": "Cumplo",
   "license": "ISC",
