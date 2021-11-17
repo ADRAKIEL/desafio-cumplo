@@ -13,6 +13,9 @@ const VoteComplete = () => {
 
     useEffect(() => {
         debug('nerv')
+        setTimeout(() => {
+            nextScreen()
+        }, 2000);
     }, [])
 
     const nextScreen = () => {
