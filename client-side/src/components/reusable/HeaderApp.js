@@ -4,10 +4,12 @@ import { fetchGetCandidates, fetchGetCountdown } from "../../utilities/fetchUtil
 import logo from '../../assets/img/logo.jpg'
 import { toast } from 'react-toastify';
 import { SetToast } from '../../utilities/settings';
+import { useNavigate } from 'react-router';
 
 const HeaderApp = () => {
     const [cutdown, setCutdown] = useState("10:00")
     const timmer = 1000000
+    const navigate = useNavigate()
 
     useEffect(() => {
         debug('nerv')
@@ -18,9 +20,16 @@ const HeaderApp = () => {
         fetchGetCountdown().then((res) => {
             console.log(res)
             setCutdown(res.secondsLeft)
+            if (res.secondsLeft < 1) {
+                nextScreen()
+            }
         }).catch(err => {
             //
         })
+    }
+
+    const nextScreen = () => {
+        navigate('/results')
     }
 
     return (
