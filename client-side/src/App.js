@@ -6,6 +6,7 @@ import './App.css';
 import ScreenSplash from './components/reusable/ScreenSplash';
 import Candidates from './components/pages/Candidates';
 import Vote from './components/pages/Vote';
+import VoteComplete from './components/pages/VoteComplete';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Routes>
             <Route path="/" exact={true} element={<ScreenSplash />} />
             <Route path="/candidates" exact={true} element={<Candidates />} />
-            <Route path="/vote" exact={true} element={<Vote />} />
+            <Route path="/vote/:id" exact={true} element={<Vote />} />
+            <Route path="/voted/" exact={true} element={<VoteComplete />} />
           </Routes>
         </div>
       </div>

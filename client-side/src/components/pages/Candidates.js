@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import { debug } from '../../utilities/helper'
-import { fetchGetCandidates } from "../../utilities/fetchUtil";
+import { fetchGetCandidates, fetchVoteCandidate } from "../../utilities/fetchUtil";
 import logo from '../../assets/img/logo.jpg'
 import { toast } from 'react-toastify';
 import { SetToast } from '../../utilities/settings';
 import HeaderApp from '../reusable/HeaderApp';
+import { useNavigate } from 'react-router';
 
 const Candidates = () => {
     const [candidatesList, setCandidatesList] = useState([{}])
+    const navigate = useNavigate()
+
     useEffect(() => {
         debug('nerv')
         getCandidates()
@@ -22,6 +25,16 @@ const Candidates = () => {
             }
         }).catch(err => {
             debug(err)
+        })
+    }
+
+    const voteCandidate = (candidate) => {
+        fetchVoteCandidate({ id: candidate?.id }).then((res) => {
+            toast.success(`Ha votado por ${res.data.name}`, SetToast)
+            navigate(`/vote/${candidate?.id}`, { state: res.data })
+
+        }).catch(err => {
+            toast.error(`${err}`, SetToast)
         })
     }
 
@@ -63,7 +76,13 @@ const Candidates = () => {
                                                             candidatesList.map((candidate, index) => {
                                                                 return (
                                                                     <tr key={index} id={candidate[1]?.id}>
-                                                                        <td><button className="btn_vote">VOTAR</button></td>
+                                                                        <td>
+                                                                            <button
+                                                                                className="btn_vote"
+                                                                                type="button"
+                                                                                onClick={e => voteCandidate(candidate[1])}
+                                                                            > VOTAR </button>
+                                                                        </td>
                                                                         <td>{candidate[1]?.name}<br /><span>{candidate[1]?.store}</span></td>
                                                                         <td className="red_number">{candidate[1]?.votes}</td>
                                                                     </tr>)
