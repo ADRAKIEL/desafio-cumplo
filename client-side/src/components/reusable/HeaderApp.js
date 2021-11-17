@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { debug } from '../../utilities/helper'
-import { fetchGetCandidates } from "../../utilities/fetchUtil";
+import { fetchGetCandidates, fetchGetCountdown } from "../../utilities/fetchUtil";
 import logo from '../../assets/img/logo.jpg'
 import { toast } from 'react-toastify';
 import { SetToast } from '../../utilities/settings';
@@ -11,7 +11,17 @@ const HeaderApp = () => {
 
     useEffect(() => {
         debug('nerv')
-    }, [])
+        getCountdown()
+    }, [cutdown])
+
+    const getCountdown = () => {
+        fetchGetCountdown().then((res) => {
+            console.log(res)
+            setCutdown(res.secondsLeft)
+        }).catch(err => {
+            //
+        })
+    }
 
     return (
         <>

@@ -11,6 +11,6 @@ module.exports = Object.freeze({
     vote: `${BASE_URL}/candidates/vote`,
 
     // CUTDOWN
-    cutdown: `${BASE_URL}/countdown`
+    countdown: `${BASE_URL}/countdown`
 
 })
