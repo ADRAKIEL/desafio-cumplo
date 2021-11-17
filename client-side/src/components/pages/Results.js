@@ -21,12 +21,17 @@ const Results = () => {
         fetchGetWinner().then(res => {
             setWinner(res)
         }).catch(err => {
-            toast.error(`${err}`, SetToast)
+            goBack()
+            //toast.error(`${err}`, SetToast)
         })
     }
 
     const nextScreen = () => {
         navigate('/results')
+    }
+
+    const goBack = () => {
+        navigate('/voted')
     }
 
     return (
